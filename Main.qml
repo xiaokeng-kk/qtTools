@@ -10,58 +10,96 @@ Window {
     visible: true
     title: qsTr("TestTool")
 
+    // Window -> Layout -> Rectangle -> Layout
     ColumnLayout {
         id: root
         anchors.fill: parent
         spacing: 0
 
-        Rectangle {
-            id: toolRec
-            Layout.fillWidth: true
-            Layout.preferredHeight: 30
-            color: "grey"
+        RowLayout {
+            id: toolBar
 
-            RowLayout {
-                spacing: 1
-                // anchors.fill: parent
-                height: parent.height
-                Layout.alignment: Qt.AlignLeft
+            Rectangle {
+                id: toolRec
+                Layout.fillWidth: true
+                Layout.preferredHeight: 20
+                color: "grey"
 
-                Button {
-                    id: fileBtn
-                    text: qsTr("file")
-                    Layout.fillHeight: true
-                }
+                RowLayout {
+                    spacing: 1
+                    height: parent.height
 
-                Button {
-                    id: toolBtn
-                    text: qsTr("tool")
-                    Layout.fillHeight: true
-                }
+                    Button {
+                        id: fileBtn
+                        text: qsTr("file")
+                        Layout.fillHeight: true
+                    }
 
-                Button {
-                    id: viewBtn
-                    text: qsTr("view")
-                    Layout.fillHeight: true
-                }
+                    Button {
+                        id: toolBtn
+                        text: qsTr("tool")
+                        Layout.fillHeight: true
+                    }
 
-                Button {
-                    id: helpBtn
-                    text: qsTr("help")
-                    Layout.fillHeight: true
+                    Button {
+                        id: viewBtn
+                        text: qsTr("view")
+                        Layout.fillHeight: true
+                    }
+
+                    Button {
+                        id: helpBtn
+                        text: qsTr("help")
+                        Layout.fillHeight: true
+                    }
                 }
             }
         }
 
         RowLayout {
             id: sideBar
-            Layout.alignment: Qt.AlignLeft
+            spacing: 1
 
             Rectangle {
                 id: sideRec
-                Layout.preferredWidth: 40
-                Layout.fillHeight: true
                 color: "green"
+                Layout.fillHeight: true
+                Layout.preferredWidth: 70
+                Layout.maximumWidth: 100
+
+                ColumnLayout {
+                    id: toolLayout
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.margins: 6
+
+                    Button {
+                        text: qsTr("数据分析")
+                        Layout.preferredHeight: 50
+                        Layout.preferredWidth: sideRec.width - 12
+
+                        onClicked: pageLoader.source = "page/dataPage.qml"
+                    }
+
+                    Button {
+                        text: qsTr("波形")
+                        Layout.preferredHeight: 50
+                       Layout.preferredWidth: sideRec.width - 12
+
+                        onClicked: pageLoader.source = "page/wavePage.qml"
+                    }
+                }
+            }
+
+            Rectangle {
+                id: mainRec
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                color: "lightgrey"
+
+                Loader {
+                    id: pageLoader
+                    anchors.fill: parent
+                }
             }
         }
     }

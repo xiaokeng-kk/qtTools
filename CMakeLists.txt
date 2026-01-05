@@ -17,6 +17,8 @@ qt_add_qml_module(appqtTools
     QML_FILES
         Main.qml
         SOURCES sensor.h sensor.cpp
+        QML_FILES page/dataPage.qml
+        QML_FILES page/wavePage.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

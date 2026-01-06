@@ -83,9 +83,17 @@ Window {
                     Button {
                         text: qsTr("波形")
                         Layout.preferredHeight: 50
-                       Layout.preferredWidth: sideRec.width - 12
+                        Layout.preferredWidth: sideRec.width - 12
 
                         onClicked: pageLoader.source = "page/wavePage.qml"
+                    }
+
+                    Button {
+                        text: qsTr("接受数据")
+                        Layout.preferredHeight: 50
+                        Layout.preferredWidth: sideRec.width - 12
+
+                        onClicked: pageLoader.source = "page/serialPort.qml"
                     }
                 }
             }

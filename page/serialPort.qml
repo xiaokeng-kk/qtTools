@@ -6,6 +6,7 @@ import qtTools 1.0
 Item {
 
     RowLayout {
+        anchors.fill: parent
 
         Rectangle {
             Layout.fillWidth: true
@@ -16,7 +17,6 @@ Item {
                 anchors.fill: parent
                 spacing: 10
 
-                // ===== 左侧：串口控制区 =====
                 ColumnLayout {
                     Layout.preferredWidth: 180
                     spacing: 8
@@ -32,9 +32,9 @@ Item {
 
                         onClicked: {
                             if (serial.isOpen) {
-                                serial.close()
+                                serial.close();
                             } else {
-                                serial.open("COM3", 1500000)
+                                serial.open(portCombo.currentText, 1500000);
                             }
                         }
                     }
@@ -43,25 +43,34 @@ Item {
                         text: serial.isOpen ? "状态：已连接" : "状态：未连接"
                         color: serial.isOpen ? "green" : "red"
                     }
+
+                    Text {
+                        id: errorText
+
+                        Connections {
+                            target: serial
+                            function onErrorOccurred(errorString) {
+                                errorText.text = errorString;
+                            }
+                        }
+                    }
                 }
 
-                // ===== 右侧：接收数据显示 =====
                 TextArea {
                     id: rxText
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
+                    // Layout.fillHeight: true
 
                     readOnly: true
                     wrapMode: TextArea.Wrap
                     placeholderText: "串口接收数据..."
                 }
 
-                // ===== 接收数据 =====
                 Connections {
                     target: serial
                     function onDataReceived(data) {
-                        rxText.text += data
-                        rxText.cursorPosition = rxText.length
+                        rxText.text += data;
+                        rxText.cursorPosition = rxText.length;
                     }
                 }
             }

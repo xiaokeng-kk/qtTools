@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "dataGen/dataGen.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);

@@ -21,6 +21,8 @@ qt_add_qml_module(appqtTools
         QML_FILES page/wavePage.qml
 )
 
+add_subdirectory(dataGen)
+
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
@@ -33,7 +35,9 @@ set_target_properties(appqtTools PROPERTIES
 )
 
 target_link_libraries(appqtTools
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Qt6::Quick
+        dataGenLib
 )
 
 include(GNUInstallDirs)

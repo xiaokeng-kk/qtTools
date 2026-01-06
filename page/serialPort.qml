@@ -18,7 +18,7 @@ Item {
                 spacing: 10
 
                 ColumnLayout {
-                    Layout.preferredWidth: 180
+                    // Layout.preferredWidth: 180
                     spacing: 8
 
                     ComboBox {
@@ -56,21 +56,23 @@ Item {
                     }
                 }
 
-                TextArea {
-                    id: rxText
+                ScrollView {
                     Layout.fillWidth: true
-                    // Layout.fillHeight: true
+                    Layout.fillHeight: true
 
-                    readOnly: true
-                    wrapMode: TextArea.Wrap
-                    placeholderText: "串口接收数据..."
+                    TextArea {
+                        id: rxText
+                        readOnly: true
+                        wrapMode: TextArea.Wrap
+                        placeholderText: "串口接收数据..."
+                    }
                 }
 
                 Connections {
                     target: serial
                     function onDataReceived(data) {
                         rxText.text += data;
-                        rxText.cursorPosition = rxText.length;
+                    // rxText.cursorPosition = rxText.length;
                     }
                 }
             }

@@ -52,7 +52,7 @@ bool SerialPortManager::isOpen() const
 void SerialPortManager::onReadyRead()
 {
     QByteArray data = m_serial.readAll();
-    emit dataReceived(data);
+    emit dataReceived(data.toHex(' ').toUpper());
 }
 
 void SerialPortManager::onError(QSerialPort::SerialPortError error)
